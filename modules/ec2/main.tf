@@ -11,18 +11,18 @@ module "start_lambda" {
   environment_vars = {
     INSTANCE_ID = var.instance_id
   }
-  source_file     = "${path.module}/lambda_code/instant-start.py"
+  source_file     = "${path.module}/lambda/instant-start.py"
 }
 
 module "stop_lambda" {
   source          = "../lambda"
   function_name   = "${var.name_prefix}_instance-stop"
-  handler         = "stop_instance.lambda_handler"
+  handler         = "instance-stop.lambda_handler"
   role_arn        = module.iam.role_arn
   environment_vars = {
     INSTANCE_ID = var.instance_id
   }
-  source_file     = "${path.module}/lambda_code/instance-stop.py"
+  source_file     = "${path.module}/lambda/instance-stop.py"
 }
 
 module "start_event" {
