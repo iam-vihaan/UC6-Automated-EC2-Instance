@@ -5,24 +5,24 @@ module "iam" {
 
 module "start_lambda" {
   source          = "../lambda"
-  function_name   = "${var.name_prefix}_start_instance"
-  handler         = "start_instance.lambda_handler"
+  function_name   = "${var.name_prefix}_instant-start"
+  handler         = "instant-start.lambda_handler"
   role_arn        = module.iam.role_arn
   environment_vars = {
     INSTANCE_ID = var.instance_id
   }
-  source_file     = "${path.module}/lambda_code/start_instance.py"
+  source_file     = "${path.module}/lambda_code/instant-start.py"
 }
 
 module "stop_lambda" {
   source          = "../lambda"
-  function_name   = "${var.name_prefix}_stop_instance"
+  function_name   = "${var.name_prefix}_instance-stop"
   handler         = "stop_instance.lambda_handler"
   role_arn        = module.iam.role_arn
   environment_vars = {
     INSTANCE_ID = var.instance_id
   }
-  source_file     = "${path.module}/lambda_code/stop_instance.py"
+  source_file     = "${path.module}/lambda_code/instance-stop.py"
 }
 
 module "start_event" {
